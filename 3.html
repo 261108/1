@@ -28,71 +28,12 @@
     </form>
 
     <div id="code-container">
-        Generated Code:
+        
         <pre id="generated-code"></pre>
-        <button id="copy-button">Copy Code</button>
+        
     </div>
-
-    <script>
-        document.getElementById("generate-code").addEventListener("click", function () {
-const imageValue = document.getElementById("image").value;
-const nameValue = document.getElementById("name").value;
- const code = `<div class="gallery">
-  <a target="_blank" href="${imageValue}">
-    <img src="${imageValue}" alt="${nameValue}">
-  </a>
-</div>`;
-            document.getElementById("generated-code").textContent = code;
-        });
-
-        document.getElementById("copy-button").addEventListener("click", function () {
-            const codeText = document.getElementById("generated-code");
-            const textArea = document.createElement("textarea");
-            textArea.value = codeText.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-            alert("Code copied to clipboard!");
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Generator</title>
-    <style>
-        .gallery {
-            text-align: center;
-        }
-        #code-container {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Code Generator</h1>
-    <form id="code-form">
-        <label for="image">Image:</label>
-        <input type="text" id="image" name="image" placeholder="Image URL">
-        <br><br>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Name">
-        <br><br>
-        <button type="button" id="generate-code">Generate Code</button>
-    </form>
-
-    <div id="code-container">
-        Generated Code:
-        <pre id="generated-code"></pre>
-        <button id="copy-button">Copy Code</button>
-    </div>
-
+<br>
+<button id="copy-button">Copy Code</button>
     <script>
         document.getElementById("generate-code").addEventListener("click", function () {
 const imageValue = document.getElementById("image").value;
