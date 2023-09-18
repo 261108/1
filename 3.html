@@ -3,55 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Generator</title>
+    <title>Code Generator</title>
+    <style>
+        .gallery {
+            text-align: center;
+        }
+        #code-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Image Generator</h1>
-
-    <form id="imageForm">
-        <label for="imageAddress">Image Address:</label>
-        <input type="text" id="imageAddress" required><br><br>
-
-        <label for="imageOpen">Image Open:</label>
-        <input type="text" id="imageOpen" required><br><br>
-
+    <h1>Code Generator</h1>
+    <form id="code-form">
+        <label for="image">Image:</label>
+        <input type="text" id="image" name="image" placeholder="Image URL">
+        <br><br>
         <label for="name">Name:</label>
-        <input type="text" id="name" required><br><br>
-
-        <button type="button" id="generateCode">Generate Code</button>
+        <input type="text" id="name" name="name" placeholder="Name">
+        <br><br>
+        <button type="button" id="generate-code">Generate Code</button>
     </form>
 
-    <textarea id="generatedCode" rows="5" cols="50" readonly></textarea>
-
-    <button type="button" id="copyCode">Copy Code</button>
+    <div id="code-container">
+        Generated Code:
+        <pre id="generated-code"></pre>
+        <button id="copy-button">Copy Code</button>
+    </div>
 
     <script>
-        function extractIframeSrc(iframeCode) {
-            const match = iframeCode.match(/src=["'](https?:\/\/[^"']+)["']/);
-            return match ? match[1] : '';
-        }
-
-        document.getElementById("generateCode").addEventListener("click", function () {
-            const imageAddress = document.getElementById("imageAddress").value;
-            const iframeCode = document.getElementById("imageOpen").value;
-            const name = document.getElementById("name").value;
-            
-            // Extract the src attribute from the iframe code
-            const imageOpen = extractIframeSrc(iframeCode);
-
-            const generatedCode = `<div class="gallery"><a target="_blank" href="${imageOpen}"><img src="${imageAddress}" alt="${name}"></a></div>`;
-            document.getElementById("generatedCode").value = generatedCode;
+        document.getElementById("generate-code").addEventListener("click", function () {
+const imageValue = document.getElementById("image").value;
+const nameValue = document.getElementById("name").value;
+ const code = `<div class="gallery">
+  <a target="_blank" href="${imageValue}">
+    <img src="${imageValue}" alt="${nameValue}">
+  </a>
+</div>`;
+            document.getElementById("generated-code").textContent = code;
         });
 
-        document.getElementById("copyCode").addEventListener("click", function () {
-            const codeToCopy = document.getElementById("generatedCode").value;
-            const textarea = document.createElement("textarea");
-            textarea.value = codeToCopy;
-            document.body.appendChild(textarea);
-            textarea.select();
+        document.getElementById("copy-button").addEventListener("click", function () {
+            const codeText = document.getElementById("generated-code");
+            const textArea = document.createElement("textarea");
+            textArea.value = codeText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
             document.execCommand("copy");
-            document.body.removeChild(textarea);
-            alert("Code has been copied to the clipboard.");
+            document.body.removeChild(textArea);
+            alert("Code copied to clipboard!");
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Generator</title>
+    <style>
+        .gallery {
+            text-align: center;
+        }
+        #code-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Code Generator</h1>
+    <form id="code-form">
+        <label for="image">Image:</label>
+        <input type="text" id="image" name="image" placeholder="Image URL">
+        <br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Name">
+        <br><br>
+        <button type="button" id="generate-code">Generate Code</button>
+    </form>
+
+    <div id="code-container">
+        Generated Code:
+        <pre id="generated-code"></pre>
+        <button id="copy-button">Copy Code</button>
+    </div>
+
+    <script>
+        document.getElementById("generate-code").addEventListener("click", function () {
+const imageValue = document.getElementById("image").value;
+const nameValue = document.getElementById("name").value;
+ const code = `<div class="gallery">
+  <a target="_blank" href="${imageValue}">
+    <img src="${imageValue}" alt="${nameValue}">
+  </a>
+</div>`;
+            document.getElementById("generated-code").textContent = code;
+        });
+
+        document.getElementById("copy-button").addEventListener("click", function () {
+            const codeText = document.getElementById("generated-code");
+            const textArea = document.createElement("textarea");
+            textArea.value = codeText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            alert("Code copied to clipboard!");
         });
     </script>
 </body>
