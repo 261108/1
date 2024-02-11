@@ -15,11 +15,18 @@
       height: 500px;
       border: 1px solid #ccc;
     }
+    #fullscreen-btn {
+      padding: 5px 10px;
+      background-color: #f1f1f1;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <input type="text" id="url-input" placeholder="https://www.example.com">
   <button onclick="loadPage()">Go</button>
+  <button id="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
   <br>
   <iframe id="iframe"></iframe>
   <script>
@@ -27,6 +34,35 @@
       const url = document.getElementById("url-input").value;
       const iframe = document.getElementById("iframe");
       iframe.src = url;
+    }
+
+    function toggleFullscreen() {
+      const doc = document.documentElement;
+      if (!document.fullscreenElement) {
+        // Request fullscreen
+        if (doc.requestFullscreen) {
+          doc.requestFullscreen();
+        } else if (doc.mozRequestFullScreen) {
+          doc.mozRequestFullScreen();
+        } else if (doc.webkitRequestFullscreen) {
+          doc.webkitRequestFullscreen();
+        } else if (doc.msRequestFullscreen) {
+          doc.msRequestFullscreen();
+        }
+        document.getElementById("fullscreen-btn").textContent = "Exit Fullscreen";
+      } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+        document.getElementById("fullscreen-btn").textContent = "Fullscreen";
+      }
     }
   </script>
 </body>
